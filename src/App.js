@@ -1,9 +1,5 @@
 import './App.css';
-import HomePage from './HomePage';
-import LogIn from './LogIn';
-import SignUp from './SignUp';
-import Recovery from './Recovery';
-import ChatRoom from './ChatRoom';
+import { HomePage, LogIn, SignUp, Recovery, ChatRoom } from './components';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 const App = () => {
