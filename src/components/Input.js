@@ -11,17 +11,18 @@ import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 
 const Input = ({ sendMessage }) => {
-    const [textMessage, setMessage] = useState('');
+    const [textMessage, setTextMessage] = useState('');
     const handleChange = (e) => {
-        setMessage(e.target.value);
+        setTextMessage(e.target.value);
     };
 
     const handleSend = (e) => {
         e.preventDefault();
         if (textMessage === '' || /^\s*$/.test(textMessage)) return;
+        console.log('MES', textMessage);
         sendMessage(textMessage);
-        setMessage('');
-        console.log('poruka', sendMessage);
+        setTextMessage('');
+        console.log('poruka', sendMessage(textMessage));
     };
     return (
         <div className='input'>
