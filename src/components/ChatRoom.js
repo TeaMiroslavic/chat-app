@@ -10,68 +10,58 @@ const randomUserColor = () => {
 };
 const ChatRoom = () => {
     const [chatMessages, setChatMessages] = useState({
-        username: randomUser(nick),
-        color: randomUserColor(),
+        users: {
+            username: randomUser(nick),
+            color: randomUserColor(),
+        },
         messages: [],
     });
     const [drone, setDrone] = useState(null);
     console.log('State prije drone:', chatMessages);
 
     useEffect(() => {
-        let mounted = true;
-        if (mounted) {
+        if (!drone) {
             const drone = new window.Scaledrone('VSCNlYJOMi2c4QHN', {
                 data: chatMessages,
             });
             setDrone(drone);
-            console.log('Connectionto Scaledrone successful!');
-            return () => {
-                mounted = false;
-                drone.close();
-            };
+            console.log('A new Scaledrone connection is created!');
         }
-    }, [chatMessages]);
-
-    useEffect(() => {
-        if (drone) {
-            drone.on('open', (error) => {
-                if (error) {
-                    return console.error(error);
-                }
-                setChatMessages((prevState) => ({
-                    ...prevState,
-                    id: drone.clientId,
-                }));
-                console.log('users s id', chatMessages);
-                console.log('connection successful');
-
-                const time = new Date().toISOString();
-
-                const room = drone.subscribe('observable-room');
-                room.on('message', (message) => {
-                    const { data, id, clientId } = message;
-                    setChatMessages((prevState) => ({
-                        ...prevState,
-                        messages: [
-                            ...prevState.messages,
-                            {
-                                textInput: data,
-                                id,
-                                time,
-                                clientId,
-                                member: chatMessages.username,
-                            },
-                        ],
-                    }));
-                });
-            });
-        }
-        return () => {
-            if (drone) {
-                drone.close();
-            }
-        };
     }, [chatMessages, drone]);
+
+    /*  useEffect(() => { */
+    if (drone) {
+        drone.on('open', (error) => {
+            if (error) {
+                return console.error(error);
+            }
+            chatMessages.users.id = drone.clientId;
+            setChatMessages(
+                {
+                    ...chatMessages,
+                },
+                chatMessages.users.id
+            );
+            console.log('users id', chatMessages.users);
+            console.log('Connection to Scaledrone service is successful!');
+
+            const time = new Date().toISOString();
+
+            const room = drone.subscribe('observable-room');
+            room.on('message', (message) => {
+                const { data, id, clientId } = message;
+                chatMessages.messages.push({
+                    textInput: data,
+                    id,
+                    time,
+                    clientId,
+                    member: chatMessages.users.username,
+                });
+                setChatMessages({ ...chatMessages }, chatMessages.messages);
+            });
+        });
+    }
+    /*  }, [chatMessages, drone]); */
 
     const sendMessage = (textInput) => {
         drone.publish({
