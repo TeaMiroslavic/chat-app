@@ -29,7 +29,6 @@ const ChatRoom = () => {
         }
     }, [chatMessages, drone]);
 
-    /*  useEffect(() => { */
     if (drone) {
         drone.on('open', (error) => {
             if (error) {
@@ -49,20 +48,18 @@ const ChatRoom = () => {
 
             const room = drone.subscribe('observable-room');
             room.on('message', (message) => {
-                const { data, id, clientId } = message;
+                const { data, id, clientId, member } = message;
                 chatMessages.messages.push({
                     textInput: data,
                     id,
                     time,
                     clientId,
-                    member: chatMessages.users.username,
+                    member,
                 });
                 setChatMessages({ ...chatMessages }, chatMessages.messages);
             });
         });
     }
-    /*  }, [chatMessages, drone]); */
-
     const sendMessage = (textInput) => {
         drone.publish({
             room: 'observable-room',
