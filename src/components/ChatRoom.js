@@ -1,7 +1,7 @@
 import Input from './Input';
 import { useState, useEffect } from 'react';
 
-const nickName = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
+const nick = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 const randomUser = (nick) => {
     return nick[Math.floor(Math.random() * nick.length)];
 };
@@ -9,24 +9,28 @@ const randomUserColor = () => {
     return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 };
 const ChatRoom = () => {
-    const [chat, setChat] = useState({
-        users: {
-            userName: randomUser(nickName),
-            color: randomUserColor(),
-        },
+    const [chatMessages, setChatMessages] = useState({
+        username: randomUser(nick),
+        color: randomUserColor(),
         messages: [],
     });
     const [drone, setDrone] = useState(null);
+    console.log('State prije drone:', chatMessages);
 
     useEffect(() => {
-        if (!drone) {
+        let mounted = true;
+        if (mounted) {
             const drone = new window.Scaledrone('VSCNlYJOMi2c4QHN', {
-                data: chat.users,
+                data: chatMessages,
             });
             setDrone(drone);
-            console.log('New connection has been opened');
+            console.log('Connectionto Scaledrone successful!');
+            return () => {
+                mounted = false;
+                drone.close();
+            };
         }
-    }, [chat.users, drone]);
+    }, [chatMessages]);
 
     useEffect(() => {
         if (drone) {
@@ -34,31 +38,48 @@ const ChatRoom = () => {
                 if (error) {
                     return console.error(error);
                 }
-                console.log('You are connected to the room');
-                const users = { ...chat.users };
-                users.id = drone.clientId;
-                setChat({ ...chat, users });
-                console.log('USER:', users);
-            });
+                setChatMessages((prevState) => ({
+                    ...prevState,
+                    id: drone.clientId,
+                }));
+                console.log('users s id', chatMessages);
+                console.log('connection successful');
 
-            const room = drone.subscribe('observable-room');
-            room.on('data', (data, member) => {
-                console.log('da, to je taj room');
-                const messages = [...chat.messages];
-                messages.push({ member, textMessage: data });
-                setChat({ ...chat, messages });
-                console.log('message', messages);
+                const time = new Date().toISOString();
+
+                const room = drone.subscribe('observable-room');
+                room.on('message', (message) => {
+                    const { data, id, clientId } = message;
+                    setChatMessages((prevState) => ({
+                        ...prevState,
+                        messages: [
+                            ...prevState.messages,
+                            {
+                                textInput: data,
+                                id,
+                                time,
+                                clientId,
+                                member: chatMessages.username,
+                            },
+                        ],
+                    }));
+                });
             });
         }
-    }, [drone, chat.users, chat.messages]);
+        return () => {
+            if (drone) {
+                drone.close();
+            }
+        };
+    }, [chatMessages, drone]);
 
-    const sendMessage = (message) => {
+    const sendMessage = (textInput) => {
         drone.publish({
             room: 'observable-room',
-            message,
+            message: textInput,
         });
+        console.log('users nakon inputa', chatMessages);
     };
-
     return (
         <div>
             {/*  <Messages activeUser={chat.users} messages={chat.messages} /> */}
