@@ -19,14 +19,14 @@ const ChatRoom = () => {
     const [drone, setDrone] = useState(null);
 
     useEffect(() => {
-        if (!drone) {
-            const drone = new window.Scaledrone('VSCNlYJOMi2c4QHN', {
-                data: chat.users,
-            });
-            setDrone(drone);
-            console.log('New connection has been opened');
-        }
-    }, [chat.users, drone]);
+        /* if (!drone) { */
+        const drone = new window.Scaledrone('VSCNlYJOMi2c4QHN', {
+            data: chat.users,
+        });
+        setDrone(drone);
+        console.log('New connection has been opened');
+        /* } */
+    }, [chat.users]);
 
     useEffect(() => {
         if (drone) {
@@ -39,16 +39,16 @@ const ChatRoom = () => {
                 users.id = drone.clientId;
                 setChat({ ...chat, users });
                 console.log('USER:', users);
-            });
 
-            const room = drone.subscribe('observable-room');
-            room.on('data', (data, member) => {
-                console.log('da, to je taj room');
-                const messages = [...chat.messages];
-                console.log('kopija', messages);
-                messages.push({ member, textMessage: data });
-                setChat({ ...chat, messages });
-                console.log('message', messages);
+                const room = drone.subscribe('observable-room');
+                room.on('data', (data, member) => {
+                    console.log('da, to je taj room');
+                    const messages = [...chat.messages];
+                    console.log('kopija', messages);
+                    messages.push({ member, textMessage: data });
+                    setChat({ ...chat, messages });
+                    console.log('message', messages);
+                });
             });
         }
     }, [chat.users, drone]);
