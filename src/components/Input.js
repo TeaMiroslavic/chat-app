@@ -11,18 +11,18 @@ import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
 
 const Input = ({ sendMessage }) => {
-    let [textInput, setTextInput] = useState('');
+    let [message, setMessage] = useState('');
     const handleChange = (e) => {
-        setTextInput(e.target.value);
+        setMessage(e.target.value);
     };
 
     const handleSend = (e) => {
         e.preventDefault();
-        if (textInput === '' || /^\s*$/.test(textInput)) return;
-        console.log('MES', textInput);
-        sendMessage(textInput);
-        setTextInput((textInput = ''));
-        /* console.log('poruka', sendMessage(textInput)); */
+        if (message === '' || /^\s*$/.test(message)) return;
+        // console.log('MES', message);
+        sendMessage(message);
+        setMessage((message = ''));
+        /* console.log('poruka', sendMessage(message)); */
     };
     return (
         <div className='input'>
@@ -40,7 +40,7 @@ const Input = ({ sendMessage }) => {
                     id='fullWidth'
                     onChange={handleChange}
                     onSubmit={handleSend}
-                    value={textInput}
+                    value={message}
                     autoFocus
                     InputProps={{
                         endAdornment: (
