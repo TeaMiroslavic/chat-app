@@ -1,6 +1,9 @@
 import Input from './Input';
 import { useState, useEffect } from 'react';
 
+const channel = process.env.REACT_APP_CHANNEL_ID;
+console.log('kanal', channel);
+
 const nick = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 const randomUser = (nick) => {
     return nick[Math.floor(Math.random() * nick.length)];
@@ -18,10 +21,9 @@ const ChatRoom = () => {
     };
     const [chat, setChat] = useState(chatRoom);
     const [drone, setDrone] = useState(null);
-
     useEffect(() => {
         if (!drone) {
-            const drone = new window.Scaledrone('VSCNlYJOMi2c4QHN', {
+            const drone = new window.Scaledrone(channel, {
                 data: chat.users,
             });
             setDrone(drone);
@@ -44,6 +46,7 @@ const ChatRoom = () => {
             const time = new Date().toISOString();
 
             const room = drone.subscribe('observable-room');
+
             room.on('message', (message) => {
                 const { data, id, clientId } = message;
                 setChat((chat) => ({
@@ -71,7 +74,7 @@ const ChatRoom = () => {
     console.log('M', chat.messages);
     return (
         <div>
-            {/*  <Messages activeUser={chat.users} messages={chat.messages} /> */}
+            {/* <Messages activeUser={chat.users} messages={chat.messages} /> */}
             <Input sendMessage={sendMessage} />
         </div>
     );
