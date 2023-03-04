@@ -19,10 +19,8 @@ const Input = ({ sendMessage }) => {
     const handleSend = (e) => {
         e.preventDefault();
         if (message === '' || /^\s*$/.test(message)) return;
-        // console.log('MES', message);
         sendMessage(message);
         setMessage((message = ''));
-        /* console.log('poruka', sendMessage(message)); */
     };
     return (
         <div className='input'>
