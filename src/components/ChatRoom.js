@@ -1,6 +1,7 @@
 import Input from './Input';
 import { useState, useEffect } from 'react';
 import Messages from './Messages';
+import ActiveUsersList from './ActiveUsersList';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
@@ -21,6 +22,7 @@ const ChatRoom = () => {
     };
     const [chat, setChat] = useState(chatRoom);
     const [drone, setDrone] = useState(null);
+    const [activeUsers, setActiveUsers] = useState([]);
     useEffect(() => {
         if (!drone) {
             const drone = new window.Scaledrone(channel, {
@@ -46,6 +48,32 @@ const ChatRoom = () => {
             const time = new Date().toISOString();
 
             const room = drone.subscribe('observable-room');
+            room.on('open', (error) => {
+                if (error) {
+                    return console.error(error);
+                }
+                console.log('Successfully joined room');
+            });
+
+            room.on('members', (activeUser) => {
+                const newActiveUsers = activeUser.map((user) => {
+                    return {
+                        id: user.id,
+                        username: user.clientData.username,
+                        color: user.clientData.color,
+                    };
+                });
+                setActiveUsers(newActiveUsers);
+            });
+
+            room.on('member_join', (member) => {
+                const newActiveUser = {
+                    id: member.id,
+                    username: member.clientData.username,
+                    color: member.clientData.color,
+                };
+                setActiveUsers([...activeUsers, newActiveUser]);
+            });
 
             room.on('message', (message) => {
                 const { data, id, clientId, member } = message;
@@ -75,6 +103,7 @@ const ChatRoom = () => {
         <div>
             <Messages activeUser={chat.users} messages={chat.messages} />
             <Input sendMessage={sendMessage} />
+            <ActiveUsersList usersList={activeUsers} />
         </div>
     );
 };
