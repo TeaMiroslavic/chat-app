@@ -7,13 +7,14 @@ const Messages = ({ activeUser, messages }) => {
 
         const messageStyle = {
             textAlign: isCurrentSender ? 'right' : 'left',
+            backgroundColor: member.clientData.color,
         };
         return (
-            <div>
-                <div key={member.id} style={messageStyle}>
+            <div key={msg.messageId}>
+                <div style={messageStyle}>
                     <span>{member.clientData.username}</span>
                 </div>
-                <div key={msg.messageId} style={messageStyle}>
+                <div style={messageStyle}>
                     <span>{message}</span>
                 </div>
             </div>

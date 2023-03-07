@@ -21,16 +21,25 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         messages: [],
     });
     const [drone, setDrone] = useState(null);
-    // const [activeUsers, setActiveUsers] = useState([]);
-
     useEffect(() => {
         if (!drone) {
             const drone = new window.Scaledrone(channel, {
                 data: chat.users,
             });
             setDrone(drone);
+            drone.on('open', (error) => {
+                if (error) {
+                    return console.error(error);
+                }
+            });
             console.log('A new Scaledrone connection is created!');
         }
+
+        return () => {
+            if (drone) {
+                drone.close();
+            }
+        };
     }, [drone, chat.users]);
 
     useEffect(() => {
