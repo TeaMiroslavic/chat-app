@@ -53,7 +53,14 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
                 const time = new Date().toISOString();
 
-                const room = drone.subscribe('observable-room');
+                const room = drone.subscribe('observable-room', {
+                    historyCount: 5,
+                });
+
+                /* room.on('history_message', (message) =>
+                    console.log('HISTORY', message)
+                ); */
+
                 room.on('open', (error) => {
                     if (error) {
                         return console.error(error);
@@ -90,6 +97,9 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                     );
                 });
 
+                room.on('history_message', (message) => {
+                    console.log('HISTORY:', message);
+                });
                 room.on('message', (message) => {
                     const { data, id, clientId, member } = message;
                     setChat((chat) => ({
@@ -108,7 +118,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
             });
         }
-    }, [drone, setActiveUsers]);
+    }, [drone, setActiveUsers, chat]);
     const sendMessage = (message) => {
         drone.publish({
             room: 'observable-room',
@@ -129,7 +139,6 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         };
         setChat(userLoggedOut);
         navigate('/');
-        // navigirati na HomePage stranicu ili nešto
     };
 
     return (

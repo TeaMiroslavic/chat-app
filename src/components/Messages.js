@@ -1,4 +1,5 @@
 const Messages = ({ currentUser, messages }) => {
+    console.log('User:', currentUser);
     const usersMessages = messages.map((msg) => {
         const message = msg.message;
         const { member } = msg;
