@@ -1,5 +1,6 @@
 import Input from './Input';
 import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Messages from './Messages';
 import ActiveUsersList from './ActiveUsersList';
 
@@ -12,7 +13,8 @@ const randomUser = (nick) => {
 const randomUserColor = () => {
     return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
 };
-const ChatRoom = () => {
+const ChatRoom = ({ activeUsers, setActiveUsers }) => {
+    const navigate = useNavigate();
     const chatRoom = {
         users: {
             username: randomUser(nick),
@@ -22,7 +24,6 @@ const ChatRoom = () => {
     };
     const [chat, setChat] = useState(chatRoom);
     const [drone, setDrone] = useState(null);
-    const [activeUsers, setActiveUsers] = useState([]);
     useEffect(() => {
         if (!drone) {
             const drone = new window.Scaledrone(channel, {
@@ -31,79 +32,116 @@ const ChatRoom = () => {
             setDrone(drone);
             console.log('A new Scaledrone connection is created!');
         }
-    }, [drone, chat.users]);
-
-    if (drone) {
-        drone.on('open', (error) => {
-            if (error) {
-                return console.error(error);
+        return () => {
+            if (drone) {
+                drone.on('close', () => {
+                    console.log('Connection has been closed');
+                });
             }
-            setChat({
-                ...chat,
-                users: {
-                    ...chat.users,
-                    id: drone.clientId,
-                },
-            });
-            const time = new Date().toISOString();
-
-            const room = drone.subscribe('observable-room');
-            room.on('open', (error) => {
+        };
+    }, [drone, chat.users]);
+    useEffect(() => {
+        if (drone) {
+            drone.on('open', (error) => {
                 if (error) {
                     return console.error(error);
                 }
-                console.log('Successfully joined room');
-            });
-
-            room.on('members', (activeUser) => {
-                const newActiveUsers = activeUser.map((user) => {
-                    return {
-                        id: user.id,
-                        username: user.clientData.username,
-                        color: user.clientData.color,
-                    };
-                });
-                setActiveUsers(newActiveUsers);
-            });
-
-            room.on('member_join', (member) => {
-                const newActiveUser = {
-                    id: member.id,
-                    username: member.clientData.username,
-                    color: member.clientData.color,
-                };
-                setActiveUsers([...activeUsers, newActiveUser]);
-            });
-
-            room.on('message', (message) => {
-                const { data, id, clientId, member } = message;
-                setChat((chat) => ({
+                setChat({
                     ...chat,
-                    messages: [
-                        ...chat.messages,
-                        {
-                            message: data,
-                            messageId: id,
-                            time,
-                            clientId,
-                            member,
-                        },
-                    ],
-                }));
+                    users: {
+                        ...chat.users,
+                        id: drone.clientId,
+                    },
+                });
+                const time = new Date().toISOString();
+
+                const room = drone.subscribe('observable-room');
+                room.on('open', (error) => {
+                    if (error) {
+                        return console.error(error);
+                    }
+                    console.log('Successfully joined room');
+                });
+
+                room.on('members', (activeUser) => {
+                    const newActiveUsers = activeUser.map((user) => {
+                        return {
+                            id: user.id,
+                            username: user.clientData.username,
+                            color: user.clientData.color,
+                        };
+                    });
+                    setActiveUsers(newActiveUsers);
+                });
+
+                room.on('member_join', (member) => {
+                    const newActiveUser = {
+                        id: member.id,
+                        username: member.clientData.username,
+                        color: member.clientData.color,
+                    };
+                    setActiveUsers((activeUsers) => [
+                        ...activeUsers,
+                        newActiveUser,
+                    ]);
+                });
+
+                room.on('member_leave', (member) => {
+                    setActiveUsers((activeUsers) =>
+                        activeUsers.filter((user) => user.id !== member.id)
+                    );
+                });
+
+                room.on('message', (message) => {
+                    const { data, id, clientId, member } = message;
+                    setChat((chat) => ({
+                        ...chat,
+                        messages: [
+                            ...chat.messages,
+                            {
+                                message: data,
+                                messageId: id,
+                                time,
+                                clientId,
+                                member,
+                            },
+                        ],
+                    }));
+                });
             });
-        });
-    }
+        }
+    }, [drone, setActiveUsers]);
     const sendMessage = (message) => {
         drone.publish({
             room: 'observable-room',
             message,
         });
     };
+
+    const handleClick = () => {
+        drone.close();
+        console.log(`Odjavljeni ste ${chat.users.username}`);
+        const userLoggedOut = {
+            users: {
+                username: '',
+                color: '',
+                id: '',
+            },
+            messages: [],
+        };
+        setChat(userLoggedOut);
+        navigate('/');
+        // navigirati na HomePage stranicu ili nešto
+    };
+
     return (
         <div>
-            <Messages activeUser={chat.users} messages={chat.messages} />
+            <Messages currentUser={chat.users} messages={chat.messages} />
             <Input sendMessage={sendMessage} />
             <ActiveUsersList usersList={activeUsers} />
+            <button type='button' onClick={handleClick}>
+                Log out
+            </button>
         </div>
     );
 };

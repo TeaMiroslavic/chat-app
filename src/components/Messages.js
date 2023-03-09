@@ -1,8 +1,8 @@
-const Messages = ({ activeUser, messages }) => {
+const Messages = ({ currentUser, messages }) => {
     const usersMessages = messages.map((msg) => {
         const message = msg.message;
         const { member } = msg;
-        const isCurrentSender = member.id === activeUser.id;
+        const isCurrentSender = member.id === currentUser.id;
 
         const messageStyle = {
             textAlign: isCurrentSender ? 'right' : 'left',
