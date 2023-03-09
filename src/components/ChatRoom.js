@@ -27,14 +27,8 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 data: chat.users,
             });
             setDrone(drone);
-            drone.on('open', (error) => {
-                if (error) {
-                    return console.error(error);
-                }
-            });
             console.log('A new Scaledrone connection is created!');
         }
-
         return () => {
             if (drone) {
                 drone.on('close', () => {
@@ -46,64 +40,75 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
 
     useEffect(() => {
         if (drone) {
-            const room = drone.subscribe('observable-room');
-            console.log('SOBA:', room);
-            room.on('open', (error) => {
+            drone.on('open', (error) => {
                 if (error) {
                     return console.error(error);
                 }
-                console.log('Successfully joined room');
-            });
+                setChat({
+                    ...chat,
+                    users: {
+                        ...chat.users,
+                        id: drone.clientId,
+                    },
+                });
+                const time = new Date().toISOString();
 
-            room.on('members', (members) => {
-                const newActiveUsers = members.map((member) => {
-                    return {
+                const room = drone.subscribe('observable-room');
+                room.on('open', (error) => {
+                    if (error) {
+                        return console.error(error);
+                    }
+                    console.log('Successfully joined room');
+                });
+
+                room.on('members', (activeUser) => {
+                    const newActiveUsers = activeUser.map((user) => {
+                        return {
+                            id: user.id,
+                            username: user.clientData.username,
+                            color: user.clientData.color,
+                        };
+                    });
+                    setActiveUsers(newActiveUsers);
+                });
+
+                room.on('member_join', (member) => {
+                    const newActiveUser = {
                         id: member.id,
                         username: member.clientData.username,
                         color: member.clientData.color,
                     };
+                    setActiveUsers((activeUsers) => [
+                        ...activeUsers,
+                        newActiveUser,
+                    ]);
                 });
-                setActiveUsers(newActiveUsers);
-            });
 
-            room.on('member_join', (member) => {
-                const newActiveUser = {
-                    id: member.id,
-                    username: member.clientData.username,
-                    color: member.clientData.color,
-                };
-                setActiveUsers((activeUsers) => [
-                    ...activeUsers,
-                    newActiveUser,
-                ]);
-                console.log('Pushan sam', newActiveUser.username);
-            });
+                room.on('member_leave', (member) => {
+                    setActiveUsers((activeUsers) =>
+                        activeUsers.filter((user) => user.id !== member.id)
+                    );
+                });
 
-            room.on('member_leave', (member) => {
-                setActiveUsers((activeUsers) =>
-                    activeUsers.filter((user) => user.id !== member.id)
-                );
-            });
-
-            room.on('message', (message) => {
-                const { data, id, clientId, member } = message;
-                setChat((chat) => ({
-                    ...chat,
-                    messages: [
-                        ...chat.messages,
-                        {
-                            message: data,
-                            messageId: id,
-                            time: new Date().toISOString(),
-                            clientId,
-                            member,
-                        },
-                    ],
-                }));
+                room.on('message', (message) => {
+                    const { data, id, clientId, member } = message;
+                    setChat((chat) => ({
+                        ...chat,
+                        messages: [
+                            ...chat.messages,
+                            {
+                                message: data,
+                                messageId: id,
+                                time,
+                                clientId,
+                                member,
+                            },
+                        ],
+                    }));
+                });
             });
         }
     }, [drone, setActiveUsers]);
-
     const sendMessage = (message) => {
         drone.publish({
             room: 'observable-room',

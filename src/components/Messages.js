@@ -1,11 +1,7 @@
 const Messages = ({ currentUser, messages }) => {
-    // const currentUser = activeUser.map((user) => user.id);
-    console.log('currentUser', currentUser.id);
-    console.log('porukica', messages);
     const usersMessages = messages.map((msg) => {
         const message = msg.message;
         const { member } = msg;
-
         const isCurrentSender = member.id === currentUser.id;
 
         const messageStyle = {

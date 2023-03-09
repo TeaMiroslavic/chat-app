@@ -6,27 +6,25 @@ import { useState } from 'react';
 const App = () => {
     const [activeUsers, setActiveUsers] = useState([]);
     return (
-        <div>
-            <Router>
-                <div className='App'>
-                    <Routes>
-                        <Route path='/' element={<HomePage />} />
-                        <Route path='/login' element={<LogIn />} />
-                        <Route path='/login/recovery' element={<Recovery />} />
-                        <Route path='/signup' element={<SignUp />} />
-                        <Route
-                            path='/chatroom'
-                            element={
-                                <ChatRoom
-                                    activeUsers={activeUsers}
-                                    setActiveUsers={setActiveUsers}
-                                />
-                            }
-                        />
-                    </Routes>
-                </div>
-            </Router>
-        </div>
+        <Router>
+            <div className='App'>
+                <Routes>
+                    <Route path='/' element={<HomePage />} />
+                    <Route path='/login' element={<LogIn />} />
+                    <Route path='/login/recovery' element={<Recovery />} />
+                    <Route path='/signup' element={<SignUp />} />
+                    <Route
+                        path='/chatroom'
+                        element={
+                            <ChatRoom
+                                activeUsers={activeUsers}
+                                setActiveUsers={setActiveUsers}
+                            />
+                        }
+                    />
+                </Routes>
+            </div>
+        </Router>
     );
 };
 
