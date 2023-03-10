@@ -9,11 +9,20 @@ import InsertEmoticonRoundedIcon from '@mui/icons-material/InsertEmoticonRounded
 import Stack from '@mui/material/Stack';
 import CameraAltRoundedIcon from '@mui/icons-material/CameraAltRounded';
 import AttachFileRoundedIcon from '@mui/icons-material/AttachFileRounded';
+import debounce from 'lodash/debounce';
 
 const Input = ({ sendMessage }) => {
     let [message, setMessage] = useState('');
+    const [typing, setTyping] = useState(false);
+
+    const handleIsTyping = debounce(function () {
+        setTyping(false);
+    }, 5000);
+
     const handleChange = (e) => {
         setMessage(e.target.value);
+        setTyping(true);
+        handleIsTyping();
     };
 
     const handleSend = (e) => {
@@ -60,8 +69,9 @@ const Input = ({ sendMessage }) => {
                                         />
                                     </Button>
                                 </Stack>
-                                {/* <Button endIcon={<AttachFileRoundedIcon />}>
-                </Button> */}
+                                <Button
+                                    endIcon={<AttachFileRoundedIcon />}
+                                ></Button>
                                 <Button endIcon={<CameraAltRoundedIcon />} />
                                 <Button
                                     variant='contained'
@@ -80,6 +90,7 @@ const Input = ({ sendMessage }) => {
                     }}
                 />
             </Box>
+            {typing && `User is typing...`}
         </div>
     );
 };

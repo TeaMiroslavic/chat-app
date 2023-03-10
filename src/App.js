@@ -5,6 +5,7 @@ import { useState } from 'react';
 
 const App = () => {
     const [activeUsers, setActiveUsers] = useState([]);
+
     return (
         <Router>
             <div className='App'>
