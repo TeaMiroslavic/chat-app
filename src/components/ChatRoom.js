@@ -6,7 +6,7 @@ import ActiveUsersList from './ActiveUsersList';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
-const nick = ['Mirko', 'Jozo', 'Pero', 'Tea', 'Klara', 'Nina', 'Dodo'];
+const nick = ['Tea', 'Dodo'];
 const randomUser = (nick) => {
     return nick[Math.floor(Math.random() * nick.length)];
 };
@@ -23,6 +23,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         messages: [],
     });
     const [drone, setDrone] = useState(null);
+    const [room, setRoom] = useState('');
     useEffect(() => {
         if (!drone) {
             const drone = new window.Scaledrone(channel, {
@@ -64,6 +65,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                     }
                     console.log('Successfully joined room');
                 });
+                setRoom(room.name);
 
                 room.on('members', (activeUser) => {
                     const newActiveUsers = activeUser.map((user) => {
@@ -98,7 +100,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                     console.log('HISTORY:', message);
                 });
                 room.on('message', (message) => {
-                    const time = new Date().toISOString();
+                    const time = new Date().toLocaleString();
                     const { data, id, clientId, member } = message;
                     setChat((chat) => ({
                         ...chat,
@@ -140,13 +142,20 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
     };
 
     return (
-        <div>
+        <div className='chatroom-container'>
+            <header className='header'>
+                <span className='my-room'>#{room}</span>
+                <button
+                    className='button-logout'
+                    type='button'
+                    onClick={handleClick}
+                >
+                    Log out
+                </button>
+            </header>
             <Messages currentUser={chat.users} messages={chat.messages} />
             <Input sendMessage={sendMessage} />
             <ActiveUsersList usersList={activeUsers} />
-            <button type='button' onClick={handleClick}>
-                Log out
-            </button>
         </div>
     );
 };
