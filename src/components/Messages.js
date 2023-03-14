@@ -1,9 +1,17 @@
+import { useRef, useEffect } from 'react';
+
 const Messages = ({ currentUser, messages }) => {
-    console.log('User:', currentUser);
+    const scrollToRef = useRef(null);
+    useEffect(() => {
+        scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
+    }, [messages]);
+
+    console.log('LENGTH', messages.length);
     const usersMessages = messages.map((msg) => {
         const message = msg.message;
         const time = msg.time;
         const { member } = msg;
+
         const isCurrentSender = member.id === currentUser.id;
         const className = isCurrentSender ? 'message-sent' : 'message-received';
 
@@ -35,7 +43,12 @@ const Messages = ({ currentUser, messages }) => {
         );
     });
 
-    return <main>{usersMessages}</main>;
+    return (
+        <main>
+            {usersMessages}
+            <div ref={scrollToRef} />
+        </main>
+    );
 };
 
 export default Messages;

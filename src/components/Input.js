@@ -7,6 +7,7 @@ const Input = ({ sendMessage }) => {
 
     const handleChange = (e) => {
         setMessage(e.target.value);
+        console.log('INPUT LENGTH', e.target.value.length);
     };
 
     const handleSend = (e) => {

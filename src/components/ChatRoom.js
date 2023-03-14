@@ -3,45 +3,42 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Messages from './Messages';
 import ActiveUsersList from './ActiveUsersList';
+import LogIn from './LogIn';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
-const nick = ['Tea', 'Dodo'];
-const randomUser = (nick) => {
-    return nick[Math.floor(Math.random() * nick.length)];
-};
-const randomUserColor = () => {
-    return '#' + Math.floor(Math.random() * 0xffffff).toString(16);
-};
 const ChatRoom = ({ activeUsers, setActiveUsers }) => {
     const navigate = useNavigate();
     const [chat, setChat] = useState({
         users: {
-            username: randomUser(nick),
-            color: randomUserColor(),
+            username: '',
+            color: '',
         },
         messages: [],
     });
     const [drone, setDrone] = useState(null);
     const [room, setRoom] = useState('');
-    useEffect(() => {
-        if (!drone) {
-            const drone = new window.Scaledrone(channel, {
-                data: chat.users,
-            });
-            setDrone(drone);
-            console.log('A new Scaledrone connection is created!');
-        }
-        return () => {
-            if (drone) {
-                drone.on('close', () => {
-                    window.location.reload();
-                    navigate('/');
-                    console.log('Connection has been closed');
-                });
-            }
+
+    const handleLogIn = (username, color) => {
+        const newUser = {
+            ...chat.users,
+            username: username,
+            color: color,
         };
-    }, [drone, chat.users, navigate]);
+        const newChat = {
+            ...chat,
+            users: newUser,
+        };
+
+        setChat(newChat);
+
+        const newDrone = new window.Scaledrone(channel, {
+            data: newUser,
+        });
+        setDrone(newDrone);
+        console.log('new user', newUser);
+        console.log('A new Scaledrone connection is created!');
+    };
 
     useEffect(() => {
         if (drone) {
@@ -102,6 +99,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 room.on('message', (message) => {
                     const time = new Date().toLocaleString();
                     const { data, id, clientId, member } = message;
+                    console.log('PRVI MEM', member);
                     setChat((chat) => ({
                         ...chat,
                         messages: [
@@ -118,7 +116,16 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
             });
         }
-    }, [chat, drone, setActiveUsers]);
+        return () => {
+            if (drone) {
+                drone.on('close', () => {
+                    window.location.reload();
+                    navigate('/');
+                    console.log('Connection has been closed');
+                });
+            }
+        };
+    }, [chat, drone, setActiveUsers, navigate]);
 
     const sendMessage = (message) => {
         drone.publish({
@@ -141,7 +148,9 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         setChat(userLoggedOut);
     };
 
-    return (
+    return chat.users.username === '' && chat.users.color === '' ? (
+        <LogIn handleLogIn={handleLogIn} />
+    ) : (
         <div className='chatroom-container'>
             <header className='header'>
                 <span className='my-room'>#{room}</span>

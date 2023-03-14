@@ -12,22 +12,22 @@ import { useNavigate } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu'; */
 
 const Navbar = () => {
-  const navigate = useNavigate();
-  const handleClick = () => {
-    navigate('/login');
-  };
-  let [theme, setTheme] = useState('light');
-  console.log(theme);
+    const navigate = useNavigate();
+    const handleClick = () => {
+        navigate('/chatroom');
+    };
+    let [theme, setTheme] = useState('light');
+    console.log(theme);
 
-  const handleClickTheme = () => {
-    theme === 'light' ? setTheme('dark') : setTheme('light');
-    return theme;
-  };
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position='static'>
-        <Toolbar>
-          {/* <IconButton
+    const handleClickTheme = () => {
+        theme === 'light' ? setTheme('dark') : setTheme('light');
+        return theme;
+    };
+    return (
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position='static'>
+                <Toolbar>
+                    {/* <IconButton
             size='large'
             edge='start'
             color='inherit'
@@ -36,22 +36,32 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton> */}
-          <Typography variant='h6' component='div' sx={{ flexGrow: 1 }}>
-            News
-          </Typography>
-          <Button
-            color='inherit'
-            startIcon={theme === 'light' ? <WbSunnyIcon /> : <DarkModeIcon />}
-            onClick={handleClickTheme}
-          >
-            Theme
-          </Button>
-          <Button color='inherit' onClick={handleClick}>
-            Login
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
+                    <Typography
+                        variant='h6'
+                        component='div'
+                        sx={{ flexGrow: 1 }}
+                    >
+                        News
+                    </Typography>
+                    <Button
+                        color='inherit'
+                        startIcon={
+                            theme === 'light' ? (
+                                <WbSunnyIcon />
+                            ) : (
+                                <DarkModeIcon />
+                            )
+                        }
+                        onClick={handleClickTheme}
+                    >
+                        Theme
+                    </Button>
+                    <Button color='inherit' onClick={handleClick}>
+                        Login
+                    </Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
+    );
 };
 export default Navbar;

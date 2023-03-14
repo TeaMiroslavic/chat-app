@@ -100,6 +100,7 @@ main {
     padding: 15px;
     border: 2px solid black;
     border-left: none;
+    resize: vertical;
 }
 
 .input input[type='text'] {
@@ -107,6 +108,8 @@ main {
     padding: 10px;
     border: none;
     border-radius: 5px;
+    min-height: 20px;
+    resize: vertical;
 }
 
 .input button {
