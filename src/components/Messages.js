@@ -6,7 +6,6 @@ const Messages = ({ currentUser, messages }) => {
         scrollToRef.current?.scrollIntoView({ behavior: 'smooth' });
     }, [messages]);
 
-    console.log('LENGTH', messages.length);
     const usersMessages = messages.map((msg) => {
         const message = msg.message;
         const time = msg.time;

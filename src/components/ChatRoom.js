@@ -3,7 +3,11 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Messages from './Messages';
 import ActiveUsersList from './ActiveUsersList';
+import OfflineusersList from './OfflineUsersList';
 import LogIn from './LogIn';
+import Main from './Main';
+import Footer from './Footer';
+import Header from './Header';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
@@ -13,17 +17,20 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         users: {
             username: '',
             color: '',
+            isActive: false,
         },
         messages: [],
     });
     const [drone, setDrone] = useState(null);
     const [room, setRoom] = useState('');
+    const [offlineUsers, setOfflineUsers] = useState([]);
 
     const handleLogIn = (username, color) => {
         const newUser = {
             ...chat.users,
             username: username,
             color: color,
+            isActive: true,
         };
         const newChat = {
             ...chat,
@@ -31,12 +38,10 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
         };
 
         setChat(newChat);
-
         const newDrone = new window.Scaledrone(channel, {
             data: newUser,
         });
         setDrone(newDrone);
-        console.log('new user', newUser);
         console.log('A new Scaledrone connection is created!');
     };
 
@@ -70,6 +75,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                             id: user.id,
                             username: user.clientData.username,
                             color: user.clientData.color,
+                            isActive: user.clientData.isActive,
                         };
                     });
                     setActiveUsers(newActiveUsers);
@@ -80,6 +86,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                         id: member.id,
                         username: member.clientData.username,
                         color: member.clientData.color,
+                        isActive: member.clientData.isActive,
                     };
                     setActiveUsers((activeUsers) => [
                         ...activeUsers,
@@ -88,9 +95,21 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
 
                 room.on('member_leave', (member) => {
-                    setActiveUsers((activeUsers) =>
-                        activeUsers.filter((user) => user.id !== member.id)
-                    );
+                    setActiveUsers((activeUsers) => {
+                        const offlineUser = activeUsers.find(
+                            (user) => user.id === member.id
+                        );
+                        if (offlineUser) {
+                            offlineUser.isActive = false;
+                            setOfflineUsers((offlineUsers) => [
+                                ...offlineUsers,
+                                offlineUser,
+                            ]);
+                        }
+                        return activeUsers.filter(
+                            (user) => user.id !== member.id
+                        );
+                    });
                 });
 
                 room.on('history_message', (message) => {
@@ -99,7 +118,6 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 room.on('message', (message) => {
                     const time = new Date().toLocaleString();
                     const { data, id, clientId, member } = message;
-                    console.log('PRVI MEM', member);
                     setChat((chat) => ({
                         ...chat,
                         messages: [
@@ -142,6 +160,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 username: '',
                 color: '',
                 id: '',
+                isActive: false,
             },
             messages: [],
         };
@@ -149,7 +168,13 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
     };
 
     return chat.users.username === '' && chat.users.color === '' ? (
-        <LogIn handleLogIn={handleLogIn} />
+        <div className='layout'>
+            <Header title={true} />
+            <Main logIn={true} handleLogIn={handleLogIn}>
+                <LogIn />
+            </Main>
+            <Footer />
+        </div>
     ) : (
         <div className='chatroom-container'>
             <header className='header'>
@@ -164,7 +189,8 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
             </header>
             <Messages currentUser={chat.users} messages={chat.messages} />
             <Input sendMessage={sendMessage} />
-            <ActiveUsersList usersList={activeUsers} />
+            <ActiveUsersList usersList={activeUsers} currentUser={chat.users} />
+            <OfflineusersList offlineList={offlineUsers} />
         </div>
     );
 };

@@ -1,12 +1,9 @@
+html,
 body {
+    font-family: sans-serif;
+    margin: 0;
     overflow-y: hidden;
-    height: 100vh;
-    background-color: peachpuff;
 }
-html {
-    height: 100%;
-}
-
 .App {
     margin: 0px;
     font-size: 16px;
@@ -15,6 +12,151 @@ html {
 * {
     box-sizing: inherit;
 }
+.layout {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        'header'
+        'main'
+        'footer';
+    border: 2px solid black;
+    height: 100vh;
+}
+
+header {
+    display: grid;
+    grid-area: header;
+    grid-template-columns: auto 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 0 20px;
+    background-color: rgb(137, 153, 148);
+    color: whitesmoke;
+}
+
+header h1 {
+    justify-self: start;
+    grid-column: 2;
+}
+
+header .button-login {
+    justify-self: end;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    grid-column: 4;
+}
+
+header img {
+    justify-self: center;
+    grid-column: 1;
+    height: 70px;
+    /* margin-left: 1rem; */
+    /*  margin-right: 0.5rem; */
+}
+main {
+    grid-area: main;
+    overflow: auto;
+    background-color: #f1eacb;
+    align-items: center;
+}
+
+.main-footer {
+    grid-area: footer;
+    background-color: rgb(137, 153, 148);
+}
+.login-content {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.login-form {
+    flex: 1;
+    max-width: 600px;
+    border-radius: 10px;
+    border: 1px solid #999;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.form-header {
+    padding: 15px 0;
+    border-bottom: 1px solid #cccccc;
+}
+.form-header h2 {
+    font-size: 28px;
+    text-align: center;
+    color: #666;
+}
+.input-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.input-with-button {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid red;
+    margin: 10px 5px;
+}
+.nickname {
+    margin-right: 1rem;
+}
+.color {
+    margin-right: 1rem;
+}
+input[type='text'] {
+    font-size: 18px;
+    width: 70%;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: white;
+    outline: none;
+    margin-right: 1rem;
+    text-align: center;
+}
+
+input[type='color'] {
+    font-size: 18px;
+    width: 65%;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: white;
+    outline: none;
+    margin-right: 1rem;
+}
+
+.form-footer {
+    display: flex;
+    justify-content: center;
+}
+
+.submit-button {
+    justify-self: center;
+    height: 3rem;
+    width: 5rem;
+    margin: 1rem;
+    border-radius: 5px;
+}
 
 .chatroom-container {
     margin: 0;
@@ -22,28 +164,17 @@ html {
     grid-template-columns: 0.5fr 2fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
-        'sidebar header'
+        'sidebar nav'
         'sidebar main'
         'sidebar footer';
     border: 2px solid black;
     height: 100vh;
 }
 
-.header {
-    display: grid;
-    grid-area: header;
-    grid-template-columns: 1fr auto;
-    grid-template-rows: 1fr;
-    align-items: center;
-    justify-content: space-between;
-    background-color: grey;
-    color: #fff;
-    padding: 20px;
-    border: 2px solid black;
-    border-left: none;
-}
+/* 
+} 
 
-.my-room {
+/* .my-room {
     justify-self: start;
 }
 
@@ -99,8 +230,6 @@ main {
     background-color: grey;
     padding: 15px;
     border: 2px solid black;
-    border-left: none;
-    resize: vertical;
 }
 
 .input input[type='text'] {
@@ -108,8 +237,6 @@ main {
     padding: 10px;
     border: none;
     border-radius: 5px;
-    min-height: 20px;
-    resize: vertical;
 }
 
 .input button {
@@ -150,3 +277,4 @@ main {
     padding-bottom: 4px;
     margin-bottom: 10px;
 }
+ */

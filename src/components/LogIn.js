@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import CasinoRoundedIcon from '@mui/icons-material/CasinoRounded';
 
 const LogIn = ({ handleLogIn }) => {
     const [users, setUsers] = useState({
@@ -37,39 +38,64 @@ const LogIn = ({ handleLogIn }) => {
     };
 
     return (
-        <div>
-            <form onSubmit={handleSend}>
-                <label htmlFor='username'>
-                    Nickname:
-                    <input
-                        id='username'
-                        type='text'
-                        autoFocus
-                        name='username'
-                        value={users.username}
-                        onChange={handleChange}
-                        placeholder='Nickname'
-                    />
-                    <button type='button' onClick={getRandomNickname}>
-                        Random
+        <section className='login-content'>
+            <form className='login-form' onSubmit={handleSend}>
+                <div className='form-header'>
+                    <h2>Choose your nickname and random color</h2>
+                </div>
+                <div className='input-container'>
+                    <div className='input-with-button'>
+                        <label htmlFor='username' className='nickname'>
+                            Nickname:
+                        </label>
+                        <input
+                            className='nickname-input'
+                            id='username'
+                            type='text'
+                            autoFocus
+                            name='username'
+                            value={users.username}
+                            onChange={handleChange}
+                            placeholder='Nickname'
+                        />
+                        <button
+                            className='nickname-button'
+                            type='button'
+                            onClick={getRandomNickname}
+                        >
+                            <CasinoRoundedIcon />
+                        </button>
+                    </div>
+                </div>
+                <div className='input-container'>
+                    <div className='input-with-button'>
+                        <label htmlFor='color' className='color'>
+                            Color:
+                        </label>
+                        <input
+                            className='color-input'
+                            id='color'
+                            type='color'
+                            name='color'
+                            value={users.color}
+                            onChange={handleChange}
+                        />
+                        <button
+                            className='color-button'
+                            type='button'
+                            onClick={getRandomColor}
+                        >
+                            <CasinoRoundedIcon />
+                        </button>
+                    </div>
+                </div>
+                <footer className='form-footer'>
+                    <button className='submit-button' type='submit'>
+                        Get in
                     </button>
-                </label>
-                <label htmlFor='color'>
-                    Color:
-                    <input
-                        is='color'
-                        type='color'
-                        name='color'
-                        value={users.color}
-                        onChange={handleChange}
-                    />
-                    <button type='button' onClick={getRandomColor}>
-                        Random
-                    </button>
-                </label>
-                <button onSubmit={handleSend}>Get in</button>
+                </footer>
             </form>
-        </div>
+        </section>
     );
 };
 
