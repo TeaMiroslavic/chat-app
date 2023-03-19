@@ -43,10 +43,15 @@ const Messages = ({ currentUser, messages }) => {
     });
 
     return (
-        <main>
+        <div className='main-messages'>
+            {/* <img
+                src={process.env.PUBLIC_URL + '/tea-chat.png'}
+                alt='Background image'
+                className='bg-image'
+            /> */}
             {usersMessages}
             <div ref={scrollToRef} />
-        </main>
+        </div>
     );
 };
 

@@ -1,4 +1,13 @@
-const Header = ({ title, theme, logInButton, logOutButton, room, onClick }) => {
+const Header = ({
+    title,
+    theme,
+    logInButton,
+    logOutButton,
+    room,
+    onClick,
+    myRoom,
+    handleClick,
+}) => {
     return (
         <header>
             <img
@@ -13,8 +22,16 @@ const Header = ({ title, theme, logInButton, logOutButton, room, onClick }) => {
                     Log in
                 </button>
             )}
-            {logOutButton}
-            {room}
+            {room && <span className='my-room'>#{myRoom}</span>}
+            {logOutButton && (
+                <button
+                    className='button-logout'
+                    type='button'
+                    onClick={handleClick}
+                >
+                    Log out
+                </button>
+            )}
         </header>
     );
 };

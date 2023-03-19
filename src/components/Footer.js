@@ -1,7 +1,9 @@
-const Footer = () => {
+import Input from './Input';
+const Footer = ({ input, sendMessage, title }) => {
     return (
         <footer className='main-footer'>
-            <h3>Footer</h3>
+            {input && <Input sendMessage={sendMessage} />}
+            {title && <h3>Ja sam footer</h3>}
         </footer>
     );
 };

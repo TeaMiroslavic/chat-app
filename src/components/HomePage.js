@@ -12,7 +12,7 @@ const HomePage = () => {
         <div className='layout'>
             <Header title={true} logInButton={true} onClick={handleClick} />
             <Main></Main>
-            <Footer></Footer>
+            <Footer title={true}></Footer>
         </div>
     );
 };

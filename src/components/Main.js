@@ -1,7 +1,20 @@
 import LogIn from './LogIn';
-
-const Main = ({ logIn, handleLogIn }) => {
-    return <main>{logIn && <LogIn handleLogIn={handleLogIn} />}</main>;
+import Messages from './Messages';
+const Main = ({
+    logIn,
+    handleLogIn,
+    messageContent,
+    currentUser,
+    messages,
+}) => {
+    return (
+        <main>
+            {logIn && <LogIn handleLogIn={handleLogIn} />}
+            {messageContent && (
+                <Messages currentUser={currentUser} messages={messages} />
+            )}
+        </main>
+    );
 };
 
 export default Main;

@@ -8,6 +8,8 @@ import LogIn from './LogIn';
 import Main from './Main';
 import Footer from './Footer';
 import Header from './Header';
+import Sidebar from './Sidebar';
+/* import Sidebar from './Sidebar'; */
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
@@ -176,21 +178,33 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
             <Footer />
         </div>
     ) : (
-        <div className='chatroom-container'>
-            <header className='header'>
-                <span className='my-room'>#{room}</span>
-                <button
-                    className='button-logout'
-                    type='button'
-                    onClick={handleClick}
-                >
-                    Log out
-                </button>
-            </header>
-            <Messages currentUser={chat.users} messages={chat.messages} />
-            <Input sendMessage={sendMessage} />
-            <ActiveUsersList usersList={activeUsers} currentUser={chat.users} />
-            <OfflineusersList offlineList={offlineUsers} />
+        <div className='layout'>
+            <Header
+                room={true}
+                myRoom={room}
+                logOutButton={true}
+                handleClick={handleClick}
+            />
+            <Main
+                messageContent={true}
+                currentUser={chat.users}
+                messages={chat.messages}
+            >
+                <Messages />
+            </Main>
+            <Footer input={true} sendMessage={sendMessage}>
+                <Input />
+            </Footer>
+            {/* <Sidebar
+                activeList={true}
+                offList={true}
+                usersList={activeUsers}
+                currentUser={chat.users}
+                offlineList={offlineUsers}
+            >
+                <ActiveUsersList />
+                <OfflineusersList />
+            </Sidebar> */}
         </div>
     );
 };

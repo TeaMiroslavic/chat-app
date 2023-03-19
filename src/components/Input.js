@@ -28,8 +28,9 @@ const Input = ({ sendMessage }) => {
     };
 
     return (
-        <footer className='input'>
+        <form className='send-form' onSubmit={handleSend}>
             <input
+                className='message-input'
                 type='text'
                 value={message}
                 onChange={handleChange}
@@ -39,13 +40,12 @@ const Input = ({ sendMessage }) => {
             />
             <button
                 className='send-button'
-                type='button'
-                onClick={handleSend}
+                type='submit'
                 disabled={!message || /^\s*$/.test(message)}
             >
                 <SendIcon />
             </button>
-        </footer>
+        </form>
     );
 };
 export default Input;
