@@ -3,17 +3,21 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Messages from './Messages';
 import ActiveUsersList from './ActiveUsersList';
-import OfflineusersList from './OfflineUsersList';
+import OfflineUsersList from './OfflineUsersList';
 import LogIn from './LogIn';
 import Main from './Main';
 import Footer from './Footer';
 import Header from './Header';
 import Sidebar from './Sidebar';
-/* import Sidebar from './Sidebar'; */
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
-const ChatRoom = ({ activeUsers, setActiveUsers }) => {
+const ChatRoom = ({
+    activeUsers,
+    setActiveUsers,
+    offlineUsers,
+    setOfflineUsers,
+}) => {
     const navigate = useNavigate();
     const [chat, setChat] = useState({
         users: {
@@ -25,7 +29,6 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
     });
     const [drone, setDrone] = useState(null);
     const [room, setRoom] = useState('');
-    const [offlineUsers, setOfflineUsers] = useState([]);
 
     const handleLogIn = (username, color) => {
         const newUser = {
@@ -97,26 +100,22 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
 
                 room.on('member_leave', (member) => {
-                    setActiveUsers((activeUsers) => {
-                        const offlineUser = activeUsers.find(
-                            (user) => user.id === member.id
-                        );
-                        if (offlineUser) {
-                            offlineUser.isActive = false;
-                            setOfflineUsers((offlineUsers) => [
-                                ...offlineUsers,
-                                offlineUser,
-                            ]);
-                        }
-                        return activeUsers.filter(
-                            (user) => user.id !== member.id
-                        );
-                    });
+                    console.log('MEM', member);
+                    const offlineUser = {
+                        username: member.clientData.username,
+                        color: member.clientData.color,
+                        id: member.id,
+                        isActive: false,
+                    };
+                    setOfflineUsers((offlineUsers) => [
+                        ...offlineUsers,
+                        offlineUser,
+                    ]);
+                    setActiveUsers((activeUsers) =>
+                        activeUsers.filter((user) => user.id !== member.id)
+                    );
                 });
 
-                room.on('history_message', (message) => {
-                    console.log('HISTORY:', message);
-                });
                 room.on('message', (message) => {
                     const time = new Date().toLocaleString();
                     const { data, id, clientId, member } = message;
@@ -145,7 +144,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
                 });
             }
         };
-    }, [chat, drone, setActiveUsers, navigate]);
+    }, [chat, drone, setActiveUsers, offlineUsers, setOfflineUsers, navigate]);
 
     const sendMessage = (message) => {
         drone.publish({
@@ -155,6 +154,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
     };
 
     const handleClick = () => {
+        console.log('ušao sam');
         drone.close();
         console.log(`Odjavljeni ste ${chat.users.username}`);
         const userLoggedOut = {
@@ -166,6 +166,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
             },
             messages: [],
         };
+        console.log('uspio sam');
         setChat(userLoggedOut);
     };
 
@@ -178,7 +179,7 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
             <Footer />
         </div>
     ) : (
-        <div className='layout'>
+        <div className='layout-chatroom'>
             <Header
                 room={true}
                 myRoom={room}
@@ -195,16 +196,15 @@ const ChatRoom = ({ activeUsers, setActiveUsers }) => {
             <Footer input={true} sendMessage={sendMessage}>
                 <Input />
             </Footer>
-            {/* <Sidebar
+            <Sidebar
                 activeList={true}
                 offList={true}
                 usersList={activeUsers}
-                currentUser={chat.users}
                 offlineList={offlineUsers}
             >
                 <ActiveUsersList />
-                <OfflineusersList />
-            </Sidebar> */}
+                <OfflineUsersList />
+            </Sidebar>
         </div>
     );
 };

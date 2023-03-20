@@ -23,13 +23,90 @@ body {
         'main'
         'footer';
     border: 2px solid black;
-    /* height: 100vh; */
 }
-/* .sidebar {
+.layout-chatroom {
+    margin: 0;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 400px 1fr;
+    grid-template-rows: auto 1fr auto;
+    grid-template-areas:
+        'sidebar header'
+        'sidebar main'
+        'sidebar footer';
+    border: 2px solid black;
+}
+
+.sidebar {
+    margin: 0;
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50%;
+    grid-template-areas:
+        'active'
+        'offline';
     background-color: rgb(137, 153, 148);
-    border: 1px solid rgb(64, 63, 63);
 }
- */
+.sidebar-active-list {
+    grid-area: active;
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    border: 1px solid black;
+    /* overflow: auto; */
+}
+.sidebar-offline-list {
+    grid-area: offline;
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    border: 1px solid black;
+    border-top: none;
+}
+.active-list {
+    max-height: 100%;
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+}
+.offline-list {
+    max-height: 100%;
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+}
+.list-header {
+    justify-self: stretch;
+    color: whitesmoke;
+    padding-left: 1em;
+}
+.avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px -10px;
+}
+.active-users {
+    display: block;
+    padding: 1em;
+    border: 1px solid black;
+    margin: 1px;
+    background-color: #b0cfbf;
+}
+.offline-users {
+    display: block;
+    padding: 1em;
+    border: 1px solid black;
+    margin: 1px;
+    background-color: #606562;
+}
+
 header {
     display: grid;
     grid-area: header;
@@ -75,6 +152,9 @@ main {
     background-color: rgb(137, 153, 148);
     border: 1px solid rgb(64, 63, 63);
     border-left: none;
+}
+.main-footer h3 {
+    text-align: center;
 }
 .login-content {
     height: 100%;
@@ -175,13 +255,7 @@ input[type='color'] {
     background-color: orangered;
     color: white;
 }
-.avatar {
-    height: 35px;
-    width: 35px;
-    border-radius: 50%;
-    display: inline-block;
-    margin: 0 10px -10px;
-}
+
 .main-messages {
     padding: 20px;
     overflow: auto;

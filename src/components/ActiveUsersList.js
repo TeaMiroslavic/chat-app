@@ -1,11 +1,8 @@
-const ActiveUsersList = ({ usersList, currentUser }) => {
+const ActiveUsersList = ({ usersList }) => {
     console.log('AC:', usersList);
-    console.log('CURR', currentUser);
     const list = usersList.map((user) => {
-        const isCurrentUser = user.id === currentUser.id;
         return (
-            <li key={user.id}>
-                {isCurrentUser && <span>YOU:</span>}
+            <li key={user.id} className='active-users'>
                 <span
                     className='avatar'
                     style={{ backgroundColor: user.color }}
@@ -15,9 +12,11 @@ const ActiveUsersList = ({ usersList, currentUser }) => {
         );
     });
     return (
-        <div className='sidebar'>
-            <h2>Active users:</h2>
-            <ul>{list}</ul>
+        <div className='sidebar-active-list'>
+            <div className='list-header'>
+                <h2>Active users:</h2>
+            </div>
+            <ul className='active-list'>{list}</ul>
         </div>
     );
 };

@@ -1,7 +1,7 @@
-/* import ActiveUsersList from './ActiveUsersList';
-import OfflineUsersList from './OfflineUsersList'; */
+import ActiveUsersList from './ActiveUsersList';
+import OfflineUsersList from './OfflineUsersList';
 
-/* const Sidebar = ({
+const Sidebar = ({
     activeList,
     offList,
     usersList,
@@ -9,7 +9,7 @@ import OfflineUsersList from './OfflineUsersList'; */
     offlineList,
 }) => {
     return (
-        <div className='sidebar'>
+        <aside className='sidebar'>
             {activeList && (
                 <ActiveUsersList
                     usersList={usersList}
@@ -17,8 +17,8 @@ import OfflineUsersList from './OfflineUsersList'; */
                 />
             )}
             {offList && <OfflineUsersList offlineList={offlineList} />}
-        </div>
+        </aside>
     );
-}; */
+};
 
-/* export default Sidebar; */
+export default Sidebar;
