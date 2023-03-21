@@ -1,5 +1,5 @@
-import ActiveUsersList from './ActiveUsersList';
-import OfflineUsersList from './OfflineUsersList';
+import ActiveUsersList from '../ActiveUsersList/ActiveUsersList';
+import OfflineUsersList from '../OfflineUsersList/OfflineUsersList';
 
 const Sidebar = ({
     activeList,

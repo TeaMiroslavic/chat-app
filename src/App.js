@@ -1,5 +1,7 @@
 import './App.css';
-import { HomePage, ChatRoom } from './components';
+import HomePage from './HomePage/HomePage';
+import ChatRoom from './ChatRoom/ChatRoom';
+/* import { HomePage, ChatRoom } from './components'; */
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
 

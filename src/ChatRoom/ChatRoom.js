@@ -1,14 +1,14 @@
-import Input from './Input';
+import Input from '../Input/Input';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Messages from './Messages';
-import ActiveUsersList from './ActiveUsersList';
-import OfflineUsersList from './OfflineUsersList';
-import LogIn from './LogIn';
-import Main from './Main';
-import Footer from './Footer';
-import Header from './Header';
-import Sidebar from './Sidebar';
+import Messages from '../Messages/Messages';
+import ActiveUsersList from '../ActiveUsersList/ActiveUsersList';
+import OfflineUsersList from '../OfflineUsersList/OfflineUsersList';
+import LogIn from '../LogIn/LogIn';
+import Main from '../Main/Main';
+import Footer from '../Footer/Footer';
+import Header from '../Header/Header';
+import Sidebar from '../Sidebar/Sidebar';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 

@@ -1,4 +1,4 @@
-import Input from './Input';
+import Input from '../Input/Input';
 import { Link } from 'react-router-dom';
 const Footer = ({ input, sendMessage, title }) => {
     return (

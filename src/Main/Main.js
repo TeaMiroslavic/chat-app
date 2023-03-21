@@ -1,5 +1,5 @@
-import LogIn from './LogIn';
-import Messages from './Messages';
+import LogIn from '../LogIn/LogIn';
+import Messages from '../Messages/Messages';
 const Main = ({
     logIn,
     handleLogIn,
