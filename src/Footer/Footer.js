@@ -1,8 +1,9 @@
+import styles from './Footer.module.css';
 import Input from '../Input/Input';
 import { Link } from 'react-router-dom';
 const Footer = ({ input, sendMessage, title }) => {
     return (
-        <footer className='main-footer'>
+        <footer className={styles.mainFooter}>
             {input && <Input sendMessage={sendMessage} />}
             {title && (
                 <h3>

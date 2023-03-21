@@ -1,0 +1,6 @@
+main {
+    grid-area: main;
+    overflow: auto;
+    background-color: #f1eacb;
+    align-items: center;
+}

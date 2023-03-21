@@ -1,3 +1,4 @@
+import styles from './Main.module.css';
 import LogIn from '../LogIn/LogIn';
 import Messages from '../Messages/Messages';
 const Main = ({

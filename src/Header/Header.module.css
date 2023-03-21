@@ -1,0 +1,44 @@
+header {
+    display: grid;
+    grid-area: header;
+    grid-template-columns: auto 1fr 1fr;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0px 20px 0 20px;
+    background-color: rgb(137, 153, 148);
+    color: whitesmoke;
+    border: 1px solid rgb(64, 63, 63);
+    border-left: none;
+}
+
+header h1 {
+    justify-self: start;
+    grid-column: 2;
+}
+
+header .buttonLogin {
+    justify-self: end;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    grid-column: 4;
+}
+
+header img {
+    justify-self: center;
+    grid-column: 1;
+    height: 70px;
+}
+.buttonLogout {
+    justify-self: end;
+    border-radius: 10px;
+    width: 50px;
+    height: 30px;
+    background-color: orangered;
+    color: white;
+}
+.myRoom {
+    justify-self: start;
+}

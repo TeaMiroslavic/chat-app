@@ -1,3 +1,4 @@
+import styles from './Messages.module.css';
 import { useRef, useEffect } from 'react';
 
 const Messages = ({ currentUser, messages }) => {
@@ -12,7 +13,9 @@ const Messages = ({ currentUser, messages }) => {
         const { member } = msg;
 
         const isCurrentSender = member.id === currentUser.id;
-        const className = isCurrentSender ? 'message-sent' : 'message-received';
+        const className = isCurrentSender
+            ? styles.messageSent
+            : styles.messageReceived;
 
         const luminance =
             (0.299 * member.clientData.color.r +
@@ -24,9 +27,11 @@ const Messages = ({ currentUser, messages }) => {
 
         return (
             <div className={className} key={msg.messageId}>
-                <div className='chat-messages'>
-                    <div className='username'>{member.clientData.username}</div>
-                    <div className='msg'>
+                <div className={styles.chatMessages}>
+                    <div className={styles.username}>
+                        {member.clientData.username}
+                    </div>
+                    <div className={styles.msg}>
                         <span
                             style={{
                                 backgroundColor: member.clientData.color,
@@ -36,7 +41,7 @@ const Messages = ({ currentUser, messages }) => {
                             {message}
                         </span>
                     </div>
-                    <div className='time'>{time}</div>
+                    <div className={styles.time}>{time}</div>
                 </div>
             </div>
         );

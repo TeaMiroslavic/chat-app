@@ -1,3 +1,4 @@
+import styles from './Header.module.css';
 const Header = ({
     title,
     theme,
@@ -18,14 +19,14 @@ const Header = ({
             {title && <h1>Spill The Tea</h1>}
             {theme}
             {logInButton && (
-                <button className='button-login' onClick={onClick}>
+                <button className={styles.buttonLogin} onClick={onClick}>
                     Log in
                 </button>
             )}
-            {room && <span className='my-room'>#{myRoom}</span>}
+            {room && <span className={styles.myRoom}>#{myRoom}</span>}
             {logOutButton && (
                 <button
-                    className='button-logout'
+                    className={styles.buttonLogout}
                     type='button'
                     onClick={handleClick}
                 >

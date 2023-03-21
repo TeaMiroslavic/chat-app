@@ -1,3 +1,4 @@
+import styles from './Input.module.css';
 import * as React from 'react';
 import { useState } from 'react';
 import SendIcon from '@mui/icons-material/Send';
@@ -28,9 +29,9 @@ const Input = ({ sendMessage }) => {
     };
 
     return (
-        <form className='send-form' onSubmit={handleSend}>
+        <form className={styles.sendForm} onSubmit={handleSend}>
             <input
-                className='message-input'
+                className={styles.messageInput}
                 type='text'
                 value={message}
                 onChange={handleChange}
@@ -39,7 +40,7 @@ const Input = ({ sendMessage }) => {
                 autoFocus
             />
             <button
-                className='send-button'
+                className={styles.sendButton}
                 type='submit'
                 disabled={!message || /^\s*$/.test(message)}
             >

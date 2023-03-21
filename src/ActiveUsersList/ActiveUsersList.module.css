@@ -1,0 +1,34 @@
+.activeUsers {
+    display: block;
+    padding: 1em;
+    border: 1px solid black;
+    margin: 1px;
+    background-color: #b0cfbf;
+}
+.avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px -10px;
+}
+.sidebarActiveList {
+    grid-area: active;
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    border: 1px solid black;
+}
+.listHeader {
+    justify-self: stretch;
+    color: whitesmoke;
+    padding-left: 1em;
+}
+.activeList {
+    max-height: 100%;
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+}

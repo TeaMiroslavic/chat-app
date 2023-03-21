@@ -1,3 +1,4 @@
+import styles from './HomePage.module.css';
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -9,7 +10,7 @@ const HomePage = () => {
         navigate('/chatroom');
     };
     return (
-        <div className='layout'>
+        <div className={styles.layout}>
             <Header title={true} logInButton={true} onClick={handleClick} />
             <Main></Main>
             <Footer title={true}></Footer>

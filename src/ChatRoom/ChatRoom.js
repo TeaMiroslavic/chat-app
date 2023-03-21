@@ -1,3 +1,4 @@
+import styles from './ChatRoom.module.css';
 import Input from '../Input/Input';
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -171,7 +172,7 @@ const ChatRoom = ({
     };
 
     return chat.users.username === '' && chat.users.color === '' ? (
-        <div className='layout'>
+        <div className={styles.layout}>
             <Header title={true} />
             <Main logIn={true} handleLogIn={handleLogIn}>
                 <LogIn />
@@ -179,7 +180,7 @@ const ChatRoom = ({
             <Footer />
         </div>
     ) : (
-        <div className='layout-chatroom'>
+        <div className={styles.layoutChatroom}>
             <Header
                 room={true}
                 myRoom={room}

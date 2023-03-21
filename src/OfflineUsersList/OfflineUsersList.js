@@ -1,3 +1,4 @@
+import styles from './OfflineUsersList.module.css';
 const OfflineUsersList = ({ offlineList }) => {
     const listOff = offlineList.map((offline) => (
         <li key={offline.id} className='offline-users'>
@@ -9,11 +10,11 @@ const OfflineUsersList = ({ offlineList }) => {
         </li>
     ));
     return (
-        <div className='sidebar-offline-list'>
-            <div className='list-header'>
+        <div className={styles.sidebarOfflineList}>
+            <div className={styles.listHeader}>
                 <h2>Offline users:</h2>
             </div>
-            <ul className='offline-list'>{listOff}</ul>
+            <ul className={styles.offlineList}>{listOff}</ul>
         </div>
     );
 };

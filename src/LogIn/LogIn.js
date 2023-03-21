@@ -1,3 +1,4 @@
+import styles from './LogIn.module.css';
 import { useState } from 'react';
 import CasinoRoundedIcon from '@mui/icons-material/CasinoRounded';
 
@@ -38,18 +39,18 @@ const LogIn = ({ handleLogIn }) => {
     };
 
     return (
-        <section className='login-content'>
-            <form className='login-form' onSubmit={handleSend}>
-                <div className='form-header'>
+        <section className={styles.loginContent}>
+            <form className={styles.loginForm} onSubmit={handleSend}>
+                <div className={styles.formHeader}>
                     <h2>Choose your nickname and random color</h2>
                 </div>
-                <div className='input-container'>
-                    <div className='input-with-button'>
-                        <label htmlFor='username' className='nickname'>
+                <div className={styles.inputContainer}>
+                    <div className={styles.inputWithButton}>
+                        <label htmlFor='username' className={styles.nickname}>
                             Nickname:
                         </label>
                         <input
-                            className='nickname-input'
+                            className={styles.nicknameInput}
                             id='username'
                             type='text'
                             autoFocus
@@ -59,7 +60,7 @@ const LogIn = ({ handleLogIn }) => {
                             placeholder='Nickname'
                         />
                         <button
-                            className='nickname-button'
+                            className={styles.nicknameButton}
                             type='button'
                             onClick={getRandomNickname}
                         >
@@ -67,13 +68,13 @@ const LogIn = ({ handleLogIn }) => {
                         </button>
                     </div>
                 </div>
-                <div className='input-container'>
-                    <div className='input-with-button'>
-                        <label htmlFor='color' className='color'>
+                <div className={styles.inputContainer}>
+                    <div className={styles.inputWithButton}>
+                        <label htmlFor='color' className={styles.color}>
                             Color:
                         </label>
                         <input
-                            className='color-input'
+                            className={styles.colorInput}
                             id='color'
                             type='color'
                             name='color'
@@ -81,7 +82,7 @@ const LogIn = ({ handleLogIn }) => {
                             onChange={handleChange}
                         />
                         <button
-                            className='color-button'
+                            className={styles.colorButton}
                             type='button'
                             onClick={getRandomColor}
                         >
@@ -89,8 +90,8 @@ const LogIn = ({ handleLogIn }) => {
                         </button>
                     </div>
                 </div>
-                <footer className='form-footer'>
-                    <button className='submit-button' type='submit'>
+                <footer className={styles.formFooter}>
+                    <button className={styles.submitButton} type='submit'>
                         Get in
                     </button>
                 </footer>

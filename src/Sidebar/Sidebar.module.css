@@ -1,0 +1,11 @@
+.sidebar {
+    margin: 0;
+    grid-area: sidebar;
+    display: grid;
+    grid-template-columns: auto;
+    grid-template-rows: 50%;
+    grid-template-areas:
+        'active'
+        'offline';
+    background-color: rgb(137, 153, 148);
+}

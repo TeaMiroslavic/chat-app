@@ -1,0 +1,38 @@
+.mainMessages {
+    padding: 20px;
+    overflow: auto;
+}
+.messageSent {
+    flex-direction: row-reverse;
+    text-align: right;
+}
+.messageReceived {
+    display: flex;
+}
+.chatMessages {
+    display: inline-block;
+}
+.messageSent > .chatMessages {
+    align-items: flex-end;
+}
+.chatMessages > .username {
+    display: block;
+    color: gray;
+    font-size: 14px;
+    padding-bottom: 4px;
+}
+.chatMessages > .msg span {
+    padding: 10px;
+    max-width: max-content;
+    font-size: 16px;
+    margin: 0;
+    border-radius: 10px;
+    display: inline-block;
+}
+.chatMessages > .time {
+    display: block;
+    color: gray;
+    font-size: 14px;
+    padding-bottom: 4px;
+    margin-bottom: 10px;
+}

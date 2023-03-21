@@ -1,0 +1,28 @@
+.listHeader {
+    justify-self: stretch;
+    color: whitesmoke;
+    padding-left: 1em;
+}
+.sidebarOfflineList {
+    grid-area: offline;
+    display: grid;
+    align-items: start;
+    justify-content: start;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    border: 1px solid black;
+    border-top: none;
+}
+.offlineList {
+    max-height: 100%;
+    list-style-type: none;
+    padding: 0;
+    overflow: auto;
+}
+.offlineUsers {
+    display: block;
+    padding: 1em;
+    border: 1px solid black;
+    margin: 1px;
+    background-color: #606562;
+}

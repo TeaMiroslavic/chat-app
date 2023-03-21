@@ -1,3 +1,4 @@
+import styles from './Sidebar.module.css';
 import ActiveUsersList from '../ActiveUsersList/ActiveUsersList';
 import OfflineUsersList from '../OfflineUsersList/OfflineUsersList';
 
@@ -9,7 +10,7 @@ const Sidebar = ({
     offlineList,
 }) => {
     return (
-        <aside className='sidebar'>
+        <aside className={styles.sidebar}>
             {activeList && (
                 <ActiveUsersList
                     usersList={usersList}

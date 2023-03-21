@@ -1,0 +1,85 @@
+.loginContent {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.loginForm {
+    flex: 1;
+    max-width: 600px;
+    border-radius: 10px;
+    border: 1px solid #999;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+.formHeader {
+    padding: 15px 0;
+    border-bottom: 1px solid #cccccc;
+}
+.formHeader h2 {
+    font-size: 28px;
+    text-align: center;
+    color: #666;
+}
+.inputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.inputWithButton {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    border: 1px solid red;
+    margin: 10px 5px;
+}
+.nickname {
+    margin-right: 1rem;
+}
+.color {
+    margin-right: 1rem;
+}
+.nicknameInput {
+    font-size: 18px;
+    width: 70%;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: white;
+    outline: none;
+    margin-right: 1rem;
+    text-align: center;
+}
+input[type='color'] {
+    font-size: 18px;
+    width: 65%;
+    height: 50px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: white;
+    outline: none;
+    margin-right: 1rem;
+}
+
+.formFooter {
+    display: flex;
+    justify-content: center;
+}
+.submitButton {
+    justify-self: center;
+    height: 3rem;
+    width: 5rem;
+    margin: 1rem;
+    border-radius: 5px;
+}
