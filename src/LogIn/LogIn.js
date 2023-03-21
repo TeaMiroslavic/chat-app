@@ -34,7 +34,8 @@ const LogIn = ({ handleLogIn }) => {
 
     const getRandomColor = () => {
         const randomColor =
-            '#' + Math.floor(Math.random() * 0xffffff).toString(16);
+            '#' +
+            (((1 << 24) * Math.random()) | 0).toString(16).padStart(6, '0');
         setUsers({ ...users, color: randomColor });
     };
 
