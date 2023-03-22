@@ -22,3 +22,14 @@
         'sidebar footer';
     border: 2px solid black;
 }
+.buttonLogout {
+    justify-self: end;
+    border-radius: 10px;
+    width: 50px;
+    height: 30px;
+    background-color: orangered;
+    color: white;
+}
+.myRoom {
+    justify-self: start;
+}

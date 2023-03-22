@@ -1,24 +1,17 @@
 import styles from './ChatRoom.module.css';
 import Input from '../Input/Input';
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Messages from '../Messages/Messages';
 import ActiveUsersList from '../ActiveUsersList/ActiveUsersList';
 import OfflineUsersList from '../OfflineUsersList/OfflineUsersList';
 import LogIn from '../LogIn/LogIn';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer';
-import Header from '../Header/Header';
 import Sidebar from '../Sidebar/Sidebar';
+import Layout from '../Layout/Layout';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
-const ChatRoom = ({
-    activeUsers,
-    setActiveUsers,
-    offlineUsers,
-    setOfflineUsers,
-}) => {
+const ChatRoom = () => {
     const navigate = useNavigate();
     const [chat, setChat] = useState({
         users: {
@@ -30,6 +23,8 @@ const ChatRoom = ({
     });
     const [drone, setDrone] = useState(null);
     const [room, setRoom] = useState('');
+    const [activeUsers, setActiveUsers] = useState([]);
+    const [offlineUsers, setOfflineUsers] = useState([]);
 
     const handleLogIn = (username, color) => {
         const newUser = {
@@ -173,36 +168,38 @@ const ChatRoom = ({
 
     return chat.users.username === '' && chat.users.color === '' ? (
         <div className={styles.layout}>
-            <Header title={true} />
-            <Main logIn={true} handleLogIn={handleLogIn}>
-                <LogIn />
-            </Main>
-            <Footer />
+            <Layout
+                title='Spill the Tea'
+                content={<LogIn handleLogIn={handleLogIn} />}
+                footer={
+                    <h3>
+                        Coded by&nbsp;<Link to='#'>Tea Miroslavić</Link>
+                    </h3>
+                }
+            ></Layout>
         </div>
     ) : (
         <div className={styles.layoutChatroom}>
-            <Header
-                room={true}
-                myRoom={room}
-                logOutButton={true}
-                handleClick={handleClick}
-            />
-            <Main
-                messageContent={true}
-                currentUser={chat.users}
-                messages={chat.messages}
-            >
-                <Messages />
-            </Main>
-            <Footer input={true} sendMessage={sendMessage}>
-                <Input />
-            </Footer>
-            <Sidebar
-                activeList={true}
-                offList={true}
-                usersList={activeUsers}
-                offlineList={offlineUsers}
-            >
+            <Layout
+                title={<span className={styles.myRoom}>#{room}</span>}
+                button={
+                    <button
+                        className={styles.buttonLogout}
+                        type='button'
+                        onClick={handleClick}
+                    >
+                        Log out
+                    </button>
+                }
+                content={
+                    <Messages
+                        currentUser={chat.users}
+                        messages={chat.messages}
+                    />
+                }
+                footer={<Input sendMessage={sendMessage} />}
+            ></Layout>
+            <Sidebar usersList={activeUsers} offlineList={offlineUsers}>
                 <ActiveUsersList />
                 <OfflineUsersList />
             </Sidebar>

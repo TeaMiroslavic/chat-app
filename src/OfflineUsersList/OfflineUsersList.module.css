@@ -9,7 +9,7 @@
     align-items: start;
     justify-content: start;
     grid-template-columns: 1fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: auto 1fr;
     border: 1px solid black;
     border-top: none;
 }
@@ -25,4 +25,11 @@
     border: 1px solid black;
     margin: 1px;
     background-color: #606562;
+}
+.avatar {
+    height: 35px;
+    width: 35px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 0 10px -10px;
 }

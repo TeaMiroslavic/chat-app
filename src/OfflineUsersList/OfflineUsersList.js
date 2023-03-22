@@ -1,9 +1,9 @@
 import styles from './OfflineUsersList.module.css';
 const OfflineUsersList = ({ offlineList }) => {
     const listOff = offlineList.map((offline) => (
-        <li key={offline.id} className='offline-users'>
+        <li key={offline.id} className={styles.offlineUsers}>
             <span
-                className='avatar'
+                className={styles.avatar}
                 style={{ backgroundColor: offline.color }}
             />
             {offline.username}

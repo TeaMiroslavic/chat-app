@@ -10,3 +10,12 @@
         'footer';
     border: 2px solid black;
 }
+.buttonLogin {
+    justify-self: end;
+    border-radius: 10px;
+    width: 80px;
+    height: 30px;
+    background-color: green;
+    color: white;
+    grid-column: 4;
+}

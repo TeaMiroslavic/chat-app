@@ -48,7 +48,7 @@ const Messages = ({ currentUser, messages }) => {
     });
 
     return (
-        <div className='main-messages'>
+        <div className={styles.mainMessages}>
             {/* <img
                 src={process.env.PUBLIC_URL + '/tea-chat.png'}
                 alt='Background image'
