@@ -92,7 +92,14 @@ const LogIn = ({ handleLogIn }) => {
                     </div>
                 </div>
                 <footer className={styles.formFooter}>
-                    <button className={styles.submitButton} type='submit'>
+                    <button
+                        className={styles.submitButton}
+                        type='submit'
+                        disabled={
+                            users.username === '' ||
+                            /^\s*$/.test(users.username)
+                        }
+                    >
                         Get in
                     </button>
                 </footer>

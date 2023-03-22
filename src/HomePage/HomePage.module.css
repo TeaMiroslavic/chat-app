@@ -8,14 +8,18 @@
         'header'
         'main'
         'footer';
-    border: 2px solid black;
 }
 .buttonLogin {
+    margin-right: 2em;
     justify-self: end;
     border-radius: 10px;
     width: 80px;
     height: 30px;
-    background-color: green;
-    color: white;
+    background-color: var(--button-logIn-color);
+    color: var(--button-txt-color);
     grid-column: 4;
+    cursor: pointer;
+}
+.buttonLogin:hover {
+    background-color: var(--button-logIn-hover-color);
 }

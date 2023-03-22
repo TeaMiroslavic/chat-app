@@ -1,3 +1,45 @@
+:root {
+    --header-bg-color: #e3dede;
+    --main-content-bg-color: #fff;
+    --footer-bg-color: #e3dede;
+    --sidebar-bg-color: #e3dede;
+    --txt-color: #222;
+    --a-txt-color: #3c2693;
+    --button-logIn-color: #ffde59;
+    --button-logIn-hover-color: #ebc942;
+    --button-txt-color: #222;
+    --button-theme-color: #e3dede;
+    --button-theme-hover-color: #cbcbcb;
+    --inputWithButton-bg-color: #f4f1f1;
+    --inputWithButton-hover-color: #e9e7e7;
+    --box-shadow-color: #5070a1;
+    --logInForm-border-color: #999;
+    --placeholder-color: #adadad;
+    --button-logout-color: #ff4500;
+    --button-logout-hover-color: #ec4204;
+}
+
+body.dark-theme {
+    --header-bg-color: #222;
+    --main-content-bg-color: #292a2d;
+    --footer-bg-color: #222;
+    --sidebar-bg-color: #222;
+    --txt-color: #e3dede;
+    --a-txt-color: #6242e1;
+    --button-logIn-color: #baa039;
+    --button-logIn-hover-color: #a99131;
+    --button-txt-color: #fff;
+    --button-theme-color: #222;
+    --button-theme-hover-color: #626060;
+    --inputWithButton-bg-color: #615f5f;
+    --inputWithButton-hover-color: #696767;
+    --box-shadow-color: #2c4263;
+    --logInForm-border-color: #e3dede;
+    --placeholder-color: #989595;
+    --button-logout-color: #c83500;
+    --button-logout-hover-color: #d53e08;
+}
+
 html,
 body {
     font-family: sans-serif;

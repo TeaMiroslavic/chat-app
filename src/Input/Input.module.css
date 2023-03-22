@@ -3,19 +3,23 @@
     grid-template-columns: 1fr auto;
     grid-gap: 1rem;
     justify-content: space-between;
-    background-color: rgb(137, 153, 148);
     padding: 15px;
+    /* border: 1px solid black; */
+    border-left: none;
 }
 .messageInput {
     grid-column: 1;
     padding: 15px;
     border: 2px solid black;
-    border-radius: 5px;
+    border-radius: 30px;
     text-align: start;
+    background-color: var(--main-content-bg-color);
+    color: var(--txt-color);
 }
 
 .sendButton {
     justify-self: end;
     border: none;
-    background-color: rgb(137, 153, 148);
+    background-color: var(--button-theme-color);
+    cursor: pointer;
 }

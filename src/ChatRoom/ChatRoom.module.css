@@ -1,34 +1,26 @@
-.layout {
-    margin: 0;
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr auto;
-    grid-template-areas:
-        'header'
-        'main'
-        'footer';
-    border: 2px solid black;
-}
 .layoutChatroom {
     margin: 0;
     height: 100vh;
     display: grid;
-    grid-template-columns: 400px 1fr;
+    grid-template-columns: 0.7fr 3fr;
     grid-template-rows: auto 1fr auto;
     grid-template-areas:
         'sidebar header'
         'sidebar main'
         'sidebar footer';
-    border: 2px solid black;
 }
 .buttonLogout {
+    grid-column: 4;
     justify-self: end;
     border-radius: 10px;
     width: 50px;
     height: 30px;
-    background-color: orangered;
+    background-color: var(--button-logout-color);
     color: white;
+    cursor: pointer;
+}
+.buttonLogout:hover {
+    background-color: var(--button-logout-hover-color);
 }
 .myRoom {
     justify-self: start;

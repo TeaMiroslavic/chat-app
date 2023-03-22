@@ -8,10 +8,12 @@ import OfflineUsersList from '../OfflineUsersList/OfflineUsersList';
 import LogIn from '../LogIn/LogIn';
 import Sidebar from '../Sidebar/Sidebar';
 import Layout from '../Layout/Layout';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
 const channel = process.env.REACT_APP_CHANNEL_ID;
 
-const ChatRoom = () => {
+const ChatRoom = ({ theme, toggleTheme }) => {
     const navigate = useNavigate();
     const [chat, setChat] = useState({
         users: {
@@ -169,7 +171,15 @@ const ChatRoom = () => {
     return chat.users.username === '' && chat.users.color === '' ? (
         <div className={styles.layout}>
             <Layout
-                title='Spill the Tea'
+                title={<h1>Spill the Tea</h1>}
+                theme={
+                    theme === 'light' ? (
+                        <LightModeIcon style={{ fill: 'black' }} />
+                    ) : (
+                        <DarkModeIcon style={{ fill: 'white' }} />
+                    )
+                }
+                toggleTheme={toggleTheme}
                 content={<LogIn handleLogIn={handleLogIn} />}
                 footer={
                     <h3>
@@ -191,6 +201,14 @@ const ChatRoom = () => {
                         Log out
                     </button>
                 }
+                theme={
+                    theme === 'light' ? (
+                        <LightModeIcon style={{ fill: 'black' }} />
+                    ) : (
+                        <DarkModeIcon style={{ fill: 'white' }} />
+                    )
+                }
+                toggleTheme={toggleTheme}
                 content={
                     <Messages
                         currentUser={chat.users}

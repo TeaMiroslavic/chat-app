@@ -1,11 +1,10 @@
 import styles from './HomePage.module.css';
 import Layout from '../Layout/Layout';
-/* import Header from '../Header/Header';
-import Main from '../Main/Main';
-import Footer from '../Footer/Footer'; */
 import { useNavigate, Link } from 'react-router-dom';
+import DarkModeIcon from '@mui/icons-material/DarkMode';
+import LightModeIcon from '@mui/icons-material/LightMode';
 
-const HomePage = () => {
+const HomePage = ({ theme, toggleTheme }) => {
     const navigate = useNavigate();
     const handleLogin = () => {
         navigate('/chatroom');
@@ -22,6 +21,14 @@ const HomePage = () => {
                         Log in
                     </button>
                 }
+                theme={
+                    theme === 'light' ? (
+                        <LightModeIcon style={{ fill: 'black' }} />
+                    ) : (
+                        <DarkModeIcon style={{ fill: 'white' }} />
+                    )
+                }
+                toggleTheme={toggleTheme}
                 content={<h1>Home page</h1>}
                 footer={
                     <h3>
@@ -29,9 +36,6 @@ const HomePage = () => {
                     </h3>
                 }
             ></Layout>
-            {/* <Header title={true} logInButton={true} onClick={handleClick} />
-            <Main></Main>
-            <Footer title={true}></Footer> */}
         </div>
     );
 };

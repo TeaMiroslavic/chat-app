@@ -1,13 +1,6 @@
 import styles from './Layout.module.css';
-// import { Outlet } from 'react-router-dom';
-// import Header from '../Header/Header';
-// import Footer from '../Footer/Footer';
-// import { useLocation } from 'react-router-dom';
 
 const Layout = (props) => {
-    /* const location = useLocation();
-    const isHomePage = location.pathname === '/'; */
-
     return (
         <div className={styles.layout}>
             <header>
@@ -17,6 +10,12 @@ const Layout = (props) => {
                     className='logo'
                 />
                 {props.title}
+                <button
+                    className={styles.themeButton}
+                    onClick={props.toggleTheme}
+                >
+                    {props.theme}
+                </button>
                 {props.button}
                 {props.children}
             </header>

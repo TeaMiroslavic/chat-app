@@ -1,5 +1,6 @@
 import styles from './Messages.module.css';
 import { useRef, useEffect } from 'react';
+import Layout from '../Layout/Layout';
 
 const Messages = ({ currentUser, messages }) => {
     const scrollToRef = useRef(null);
@@ -49,11 +50,6 @@ const Messages = ({ currentUser, messages }) => {
 
     return (
         <div className={styles.mainMessages}>
-            {/* <img
-                src={process.env.PUBLIC_URL + '/tea-chat.png'}
-                alt='Background image'
-                className='bg-image'
-            /> */}
             {usersMessages}
             <div ref={scrollToRef} />
         </div>

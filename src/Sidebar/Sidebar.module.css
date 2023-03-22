@@ -3,9 +3,9 @@
     grid-area: sidebar;
     display: grid;
     grid-template-columns: auto;
-    grid-template-rows: 50%;
+    grid-template-rows: 1fr 1fr;
     grid-template-areas:
         'active'
         'offline';
-    background-color: rgb(137, 153, 148);
+    background-color: var(--sidebar-bg-color);
 }

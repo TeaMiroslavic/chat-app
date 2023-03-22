@@ -44,7 +44,7 @@ const Input = ({ sendMessage }) => {
                 type='submit'
                 disabled={!message || /^\s*$/.test(message)}
             >
-                <SendIcon />
+                <SendIcon color='primary' fontSize='large' />
             </button>
         </form>
     );

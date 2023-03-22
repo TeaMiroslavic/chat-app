@@ -1,9 +1,8 @@
 .activeUsers {
     display: block;
-    padding: 1em;
-    border: 1px solid black;
-    margin: 1px;
-    background-color: #b0cfbf;
+    padding: 0.5em;
+    margin: 0 10px 0 10px;
+    color: var(--txt-color);
 }
 .avatar {
     height: 35px;
@@ -20,10 +19,11 @@
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
     border: 1px solid black;
+    border-right: 2px solid black;
 }
 .listHeader {
     justify-self: stretch;
-    color: whitesmoke;
+    color: var(--txt-color);
     padding-left: 1em;
 }
 .activeList {
