@@ -1,6 +1,5 @@
 import styles from './Messages.module.css';
 import { useRef, useEffect } from 'react';
-import Layout from '../Layout/Layout';
 
 const Messages = ({ currentUser, messages }) => {
     const scrollToRef = useRef(null);

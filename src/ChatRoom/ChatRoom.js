@@ -98,7 +98,6 @@ const ChatRoom = ({ theme, toggleTheme }) => {
                 });
 
                 room.on('member_leave', (member) => {
-                    console.log('MEM', member);
                     const offlineUser = {
                         username: member.clientData.username,
                         color: member.clientData.color,
@@ -152,9 +151,7 @@ const ChatRoom = ({ theme, toggleTheme }) => {
     };
 
     const handleClick = () => {
-        console.log('ušao sam');
         drone.close();
-        console.log(`Odjavljeni ste ${chat.users.username}`);
         const userLoggedOut = {
             users: {
                 username: '',
@@ -164,7 +161,6 @@ const ChatRoom = ({ theme, toggleTheme }) => {
             },
             messages: [],
         };
-        console.log('uspio sam');
         setChat(userLoggedOut);
     };
 

@@ -8,4 +8,8 @@
         'active'
         'offline';
     background-color: var(--sidebar-bg-color);
+    transition: width 0.5s ease-in-out;
+}
+.sidebar.hidden {
+    width: 0; /* Set the width to 0 to hide the sidebar */
 }

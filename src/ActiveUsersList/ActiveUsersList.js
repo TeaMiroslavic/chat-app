@@ -1,6 +1,5 @@
 import styles from './ActiveUsersList.module.css';
 const ActiveUsersList = ({ usersList }) => {
-    console.log('AC:', usersList);
     const list = usersList.map((user) => {
         return (
             <li key={user.id} className={styles.activeUsers}>

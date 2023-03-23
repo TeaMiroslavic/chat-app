@@ -13,17 +13,18 @@
     border: 1px solid black;
     border-top: none;
     border-right: 2px solid black;
+    overflow: auto;
 }
 .offlineList {
     max-height: 100%;
     list-style-type: none;
     padding: 0;
-    overflow: auto;
 }
 .offlineUsers {
     display: block;
     padding: 0.5em;
     margin: 0 10px 0 10px;
+    color: var(--txt-color);
 }
 .avatar {
     height: 35px;
@@ -31,4 +32,5 @@
     border-radius: 50%;
     display: inline-block;
     margin: 0 10px -10px;
+    border: 1px solid var(--txt-color);
 }

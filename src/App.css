@@ -17,6 +17,8 @@
     --placeholder-color: #adadad;
     --button-logout-color: #ff4500;
     --button-logout-hover-color: #ec4204;
+    --cardOneThree-bg-color: #ff6347;
+    --cardTwoFour-bg-color: #728cd9;
 }
 
 body.dark-theme {
@@ -38,6 +40,8 @@ body.dark-theme {
     --placeholder-color: #989595;
     --button-logout-color: #c83500;
     --button-logout-hover-color: #d53e08;
+    --cardOneThree-bg-color: #bc3f29;
+    --cardTwoFour-bg-color: #2c4899;
 }
 
 html,
