@@ -24,6 +24,7 @@
 
 .title {
     font-size: 2em;
+    text-align: center;
 }
 
 .section {
@@ -31,6 +32,7 @@
     justify-content: space-between;
     flex-direction: column;
     overflow: hidden;
+    font-size: 1em;
 }
 
 .cardOne,
@@ -46,6 +48,7 @@
     border-radius: 10px;
     max-width: 50%;
     margin-bottom: 1em;
+    font-size: 1.2em;
 }
 
 .cardOne,
@@ -80,4 +83,60 @@
     color: var(--txt-color);
     text-align: left;
     background-color: var(--cardTwoFour-bg-color);
+}
+@media only screen and (max-width: 600px) {
+    .buttonLogin {
+        justify-self: end;
+        margin: 0;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .section {
+        font-size: 1.5em;
+    }
+    .cardOne,
+    .cardTwo,
+    .cardThree,
+    .cardFour {
+        font-size: 0.5em;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .buttonLogin {
+        justify-self: end;
+        margin: 0;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .section {
+        font-size: 1.5em;
+    }
+    .cardOne,
+    .cardTwo,
+    .cardThree,
+    .cardFour {
+        font-size: 0.5em;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .buttonLogin {
+        justify-self: end;
+        margin: 0;
+    }
+    .title {
+        font-size: 1.5em;
+    }
+    .section {
+        font-size: 1.5em;
+    }
+    .cardOne,
+    .cardTwo,
+    .cardThree,
+    .cardFour {
+        font-size: 0.5em;
+    }
 }

@@ -33,3 +33,50 @@
     list-style-type: none;
     padding: 0;
 }
+@media only screen and (max-width: 600px) {
+    .activeUsers {
+        margin: 0;
+        font-size: 0.8rem;
+    }
+    .avatar {
+        height: 25px;
+        width: 25px;
+        margin: 0 5px -5px;
+    }
+    .listHeader {
+        padding-left: 0.5em;
+    }
+    .listHeader h2 {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    .activeUsers {
+        margin: 0 20px 0 0;
+        font-size: 1rem;
+    }
+    .avatar {
+        height: 30px;
+        width: 30px;
+        margin: 0 10px -10px;
+    }
+    .sidebarActiveList {
+        display: grid;
+    }
+    .listHeader {
+        padding-left: 0.5em;
+    }
+    .listHeader h2 {
+        font-size: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .listHeader {
+        padding-left: 0.5em;
+    }
+    .listHeader h2 {
+        font-size: 1rem;
+    }
+}

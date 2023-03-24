@@ -68,3 +68,61 @@ a {
 .themeButton:hover {
     background-color: var(--button-theme-hover-color);
 }
+
+@media only screen and (max-width: 600px) {
+    .layout {
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            'header'
+            'main'
+            'footer';
+    }
+    header {
+        grid-template-columns: auto 1fr;
+        padding: 0px 10px 0 10px;
+    }
+    header img {
+        margin-left: 0;
+        height: 50px;
+    }
+    .themeButton {
+        margin-right: 1em;
+        width: 2.5em;
+        height: 2.5em;
+    }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 768px) {
+    header {
+        grid-template-columns: auto 1fr;
+        padding: 0px 10px 0 10px;
+    }
+    header img {
+        margin-left: 0;
+        height: 50px;
+    }
+    .themeButton {
+        margin-right: 1em;
+        width: 2.5em;
+        height: 2.5em;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 992px) {
+    .layout {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto 1fr auto;
+        grid-template-areas:
+            'header'
+            'main'
+            'footer';
+    }
+    header {
+        grid-template-columns: auto auto 1fr;
+        padding: 0px 20px 0 20px;
+    }
+    header img {
+        margin-left: 0;
+        height: 60px;
+    }
+}
