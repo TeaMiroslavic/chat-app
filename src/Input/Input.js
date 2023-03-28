@@ -8,14 +8,12 @@ const Input = ({ sendMessage }) => {
 
     const handleChange = (e) => {
         setMessage(e.target.value);
-        //console.log('INPUT LENGTH', e.target.value.length);
     };
 
     const handleSend = (e) => {
         e.preventDefault();
         if (message === '' || /^\s*$/.test(message)) return;
         sendMessage(message);
-        console.log('MES', message);
         setMessage((message = ''));
     };
 

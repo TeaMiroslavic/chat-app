@@ -164,9 +164,6 @@ const LogIn = ({ handleLogIn }) => {
         const noun = nouns[Math.floor(Math.random() * nouns.length)];
         const randomNickname = adjective + '_' + noun;
         setUsers({ ...users, username: randomNickname });
-        /*  const nicks = ['Tea', 'Dodo', 'Klarica', 'Jojo', 'Jura', 'Lola'];
-        const randomNickname = nicks[Math.floor(Math.random() * nicks.length)];
-         */
     };
 
     const getRandomColor = () => {

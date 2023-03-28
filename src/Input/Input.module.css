@@ -4,7 +4,6 @@
     grid-gap: 1rem;
     justify-content: space-between;
     padding: 15px;
-    /* border: 1px solid black; */
     border-left: none;
 }
 .messageInput {
@@ -16,10 +15,16 @@
     background-color: var(--main-content-bg-color);
     color: var(--txt-color);
 }
+.messageInput:hover {
+    border: 2px solid var(--inputSend-hover-color);
+}
 
 .sendButton {
     justify-self: end;
     border: none;
     background-color: var(--button-theme-color);
     cursor: pointer;
+}
+.sendButton:hover {
+    background-color: var(--button-theme-hover-color);
 }

@@ -19,6 +19,7 @@
     --button-logout-hover-color: #ec4204;
     --cardOneThree-bg-color: #ff6347;
     --cardTwoFour-bg-color: #728cd9;
+    --inputSend-hover-color: #2254c9;
 }
 
 body.dark-theme {
@@ -42,6 +43,7 @@ body.dark-theme {
     --button-logout-hover-color: #d53e08;
     --cardOneThree-bg-color: #bc3f29;
     --cardTwoFour-bg-color: #2c4899;
+    --inputSend-hover-color: #29427c;
 }
 
 html,

@@ -41,7 +41,7 @@ const Messages = ({ currentUser, messages }) => {
                             {message}
                         </span>
                     </div>
-                    <div className={styles.time}>{time}</div>
+                    <span className={styles.time}>{time}</span>
                 </div>
             </div>
         );
