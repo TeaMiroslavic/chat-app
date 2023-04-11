@@ -70,7 +70,7 @@ const ChatRoom = ({ theme, toggleTheme }) => {
                     }
                     console.log('Successfully joined room');
                 });
-                setRoom(room.name);
+                setRoom(room);
 
                 room.on('members', (activeUser) => {
                     const newActiveUsers = activeUser.map((user) => {
