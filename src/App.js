@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './HomePage/HomePage';
 import ChatRoom from './ChatRoom/ChatRoom';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const App = () => {
@@ -32,11 +32,12 @@ const App = () => {
         localStorage.setItem('theme', newTheme);
     };
     return (
-        <Router>
+        <Router basename='/chat-app'>
             <div className={`App ${theme}`}>
                 <Routes>
                     <Route
-                        path='/'
+                        exact
+                        path='/chat-app'
                         element={
                             <HomePage theme={theme} toggleTheme={toggleTheme} />
                         }
