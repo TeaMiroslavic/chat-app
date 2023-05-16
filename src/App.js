@@ -1,7 +1,7 @@
 import './App.css';
 import HomePage from './HomePage/HomePage';
 import ChatRoom from './ChatRoom/ChatRoom';
-import { HashRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter, Route, Routes } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
 const App = () => {
@@ -32,12 +32,11 @@ const App = () => {
         localStorage.setItem('theme', newTheme);
     };
     return (
-        <Router basename='/chat-app'>
+        <HashRouter>
             <div className={`App ${theme}`}>
                 <Routes>
                     <Route
-                        exact
-                        path='/chat-app'
+                        path='/'
                         element={
                             <HomePage theme={theme} toggleTheme={toggleTheme} />
                         }
@@ -50,7 +49,7 @@ const App = () => {
                     />
                 </Routes>
             </div>
-        </Router>
+        </HashRouter>
     );
 };
 export default App;
